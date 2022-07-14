@@ -6,7 +6,7 @@ SET
 -- create tables
 CREATE TABLE IF NOT EXISTS fact_messages (
     message_id bigint UNIQUE NOT NULL,
-    message_timestamp timestamp with time zone NOT NULL,
+    message_timestamp timestamp WITH time zone NOT NULL,
     contents text,
     attachment_link text,
     channel_id bigint NOT NULL,
