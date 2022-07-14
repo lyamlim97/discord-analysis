@@ -1,6 +1,7 @@
 CREATE SCHEMA IF NOT EXISTS discord_data;
 
-SET search_path TO discord_data;
+SET
+    search_path TO discord_data;
 
 -- create tables
 CREATE TABLE IF NOT EXISTS fact_messages (
@@ -33,30 +34,45 @@ CREATE TABLE IF NOT EXISTS dim_channel_type (
 );
 
 -- add foreign key references
-ALTER TABLE fact_messages ADD FOREIGN KEY (channel_id) REFERENCES dim_channel (channel_id);
+ALTER TABLE
+    fact_messages
+ADD
+    FOREIGN KEY (channel_id) REFERENCES dim_channel (channel_id);
 
-ALTER TABLE dim_channel ADD FOREIGN KEY (channel_type_key) REFERENCES dim_channel_type (channel_type_key);
+ALTER TABLE
+    dim_channel
+ADD
+    FOREIGN KEY (channel_type_key) REFERENCES dim_channel_type (channel_type_key);
 
-ALTER TABLE dim_channel ADD FOREIGN KEY (server_id) REFERENCES dim_server (server_id);
+ALTER TABLE
+    dim_channel
+ADD
+    FOREIGN KEY (server_id) REFERENCES dim_server (server_id);
 
 -- import data from csv
-
 COPY dim_channel_type(channel_type_key, channel_type)
-FROM 'C:\Users\Dante\Desktop\Projects\discord-analysis\dim_channel_type.csv'
-DELIMITER ','
-CSV HEADER;
+FROM
+    'C:\Users\Dante\Desktop\Projects\discord-analysis\dim_channel_type.csv' DELIMITER ',' CSV HEADER;
 
 COPY dim_server(server_id, server_name)
-FROM 'C:\Users\Dante\Desktop\Projects\discord-analysis\dim_server.csv'
-DELIMITER ','
-CSV HEADER;
+FROM
+    'C:\Users\Dante\Desktop\Projects\discord-analysis\dim_server.csv' DELIMITER ',' CSV HEADER;
 
-COPY dim_channel(channel_id, channel_name, channel_type_key, server_id)
-FROM 'C:\Users\Dante\Desktop\Projects\discord-analysis\dim_channel.csv'
-DELIMITER ','
-CSV HEADER;
+COPY dim_channel(
+    channel_id,
+    channel_name,
+    channel_type_key,
+    server_id
+)
+FROM
+    'C:\Users\Dante\Desktop\Projects\discord-analysis\dim_channel.csv' DELIMITER ',' CSV HEADER;
 
-COPY fact_messages(message_id, message_timestamp, contents, attachment_link, channel_id)
-FROM 'C:\Users\Dante\Desktop\Projects\discord-analysis\fact_messages.csv'
-DELIMITER ','
-CSV HEADER;
+COPY fact_messages(
+    message_id,
+    message_timestamp,
+    contents,
+    attachment_link,
+    channel_id
+)
+FROM
+    'C:\Users\Dante\Desktop\Projects\discord-analysis\fact_messages.csv' DELIMITER ',' CSV HEADER;
