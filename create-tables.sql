@@ -52,13 +52,11 @@ ADD
 -- import data from csv
 COPY dim_channel_type(channel_type_key, channel_type)
 FROM
-    'C:\Users\Dante\Desktop\Projects\discord-analysis\dim_channel_type.csv' DELIMITER ',
-' CSV HEADER;
+    'C:\Users\Dante\Desktop\Projects\discord-analysis\dim_channel_type.csv' DELIMITER ',' CSV HEADER;
 
 COPY dim_server(server_id, server_name)
 FROM
-    'C:\Users\Dante\Desktop\Projects\discord-analysis\dim_server.csv' DELIMITER ',
-' CSV HEADER;
+    'C:\Users\Dante\Desktop\Projects\discord-analysis\dim_server.csv' DELIMITER ',' CSV HEADER;
 
 COPY dim_channel(
     channel_id,
@@ -67,8 +65,7 @@ COPY dim_channel(
     server_id
 )
 FROM
-    'C:\Users\Dante\Desktop\Projects\discord-analysis\dim_channel.csv' DELIMITER ',
-' CSV HEADER;
+    'C:\Users\Dante\Desktop\Projects\discord-analysis\dim_channel.csv' DELIMITER ',' CSV HEADER;
 
 COPY fact_messages(
     message_id,
@@ -78,5 +75,4 @@ COPY fact_messages(
     channel_id
 )
 FROM
-    'C:\Users\Dante\Desktop\Projects\discord-analysis\fact_messages.csv' DELIMITER ',
-' CSV HEADER;
+    'C:\Users\Dante\Desktop\Projects\discord-analysis\fact_messages.csv' DELIMITER ',' CSV HEADER;
